@@ -184,7 +184,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-STATICFILES_STRORAGE = 'custom_storages.StaticStorage'
+from storages.backends.s3boto3 import S3Boto3Storage
 
 if 'USE_AWS' in os.environ:
     # Bucket Config
@@ -194,8 +194,20 @@ if 'USE_AWS' in os.environ:
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_S3_REGION_NAME}.{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+    try:
+        s3_storage = S3Boto3Storage(
+            bucket_name=AWS_STORAGE_BUCKET_NAME,
+            region_name=AWS_S3_REGION_NAME,
+            access_key=AWS_ACCESS_KEY_ID,
+            secret_key=AWS_SECRET_ACCESS_KEY,
+        )
+        print("S3Boto3Storage instantiated successfully in settings.py")
+    except Exception as e:
+        print(f"Error instantiating S3Boto3Storage in settings.py: {e}")
+
     # Static and Media Files
-    
     STATICFILES_LOCATION = 'static'
     DEFAULT_FILE_STRORAGE = 'custom_storages.MediaStorage'
     MEDIAFILES_LOCATION = 'media'
@@ -203,6 +215,8 @@ if 'USE_AWS' in os.environ:
     # Override static and media settings
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+else:
+    pass
 
 # Stripe
 FREE_DELIVERY_THRESHOLD = 50
