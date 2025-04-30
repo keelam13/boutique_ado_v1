@@ -184,6 +184,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+STATICFILES_STRORAGE = 'custom_storages.StaticStorage'
+
 if 'USE_AWS' in os.environ:
     # Bucket Config
     AWS_STORAGE_BUCKET_NAME = 'boutiqueado-keelam'
@@ -193,7 +195,7 @@ if 'USE_AWS' in os.environ:
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_S3_REGION_NAME}.{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
     # Static and Media Files
-    STATICFILES_STRORAGE = 'custom_storages.StaticStorage'
+    
     STATICFILES_LOCATION = 'static'
     DEFAULT_FILE_STRORAGE = 'custom_storages.MediaStorage'
     MEDIAFILES_LOCATION = 'media'
