@@ -33,7 +33,6 @@ DEBUG = 'DEVELOPMENT' in os.environ
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
-    'boutiqueado-by-keelam-2a8b55ba9e9d.herokuapp.com',
 ]
 
 # Application definition
