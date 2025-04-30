@@ -9,8 +9,3 @@ class CustomClearableFileInput(ClearableFileInput):
     initial_text = _('Current Image')
     input_text = _('')
     template_name = 'products/custom_widget_templates/custom_clearable_file_input.html'
-
-    # def get_context(self, name, value, attrs):
-    #     context = super().get_context(name, value, attrs)
-    #     context['clear_checkbox_label'] = _('Clear')
-    #     return context
