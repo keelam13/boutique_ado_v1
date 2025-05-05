@@ -292,6 +292,10 @@ input[name='q']::placeholder {
         font-size: 2rem;
     }
 
+    .navbar {
+        margin: 0 .5rem 0 .5rem;
+    }
+
     .nav-link {
         padding: 0.15rem;
     }
@@ -299,6 +303,7 @@ input[name='q']::placeholder {
     .nav-link i.fa-lg {
         font-size: 1rem;
     }
+
     .navbar-toggler {
         padding: .6rem .6rem;
         font-size: 1rem;
