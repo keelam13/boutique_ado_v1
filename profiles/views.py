@@ -6,6 +6,7 @@ from .forms import UserProfileForm
 
 from checkout.models import Order
 
+
 @login_required
 def profile(request):
     """
@@ -19,7 +20,9 @@ def profile(request):
             form.save()
             messages.success(request, 'Your profile has been updated!')
         else:
-            messages.error(request, 'Update failed. Please ensure the form is valid.')
+            messages.error(
+                request, 'Update failed. Please ensure the form is valid.'
+            )
     else:
         form = UserProfileForm(instance=profile)
     orders = profile.orders.all()
@@ -30,7 +33,7 @@ def profile(request):
         'orders': orders,
         'on_profile_page': True,
     }
-    
+
     return render(request, template, context)
 
 
